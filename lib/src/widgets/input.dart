@@ -216,7 +216,7 @@ class _InputState extends State<Input> {
                             },
                             child: Image.asset(
                               'assets/icon-emoji.png',
-                              package: 'ggi_chat',
+                              
                             )),
                       ),
                     ),

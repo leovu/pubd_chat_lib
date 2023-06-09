@@ -36,7 +36,7 @@ class SendButton extends StatelessWidget {
               Image.asset(
                 'assets/icon-send.png',
                 color: InheritedChatTheme.of(context).theme.inputTextColor,
-                package: 'ggi_chat',
+                
               ),
           onPressed: onPressed,
           padding: padding,
