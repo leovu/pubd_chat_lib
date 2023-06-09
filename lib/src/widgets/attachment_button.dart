@@ -44,6 +44,7 @@ class AttachmentButton extends StatelessWidget {
             Image.asset(
               'assets/icon-attachment.png',
               color: InheritedChatTheme.of(context).theme.inputTextColor,
+              package: 'pubd_chat'
             ),
     onPressed: isLoading ? null : onPressed,
     padding: padding,

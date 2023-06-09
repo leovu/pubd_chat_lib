@@ -384,7 +384,7 @@ class Message extends StatelessWidget {
             : Image.asset(
                 'assets/icon-delivered.png',
                 color: InheritedChatTheme.of(context).theme.primaryColor,
-                
+                package: 'pubd_chat'
               );
       case types.Status.error:
         return InheritedChatTheme.of(context).theme.errorIcon != null
@@ -392,7 +392,7 @@ class Message extends StatelessWidget {
             : Image.asset(
                 'assets/icon-error.png',
                 color: InheritedChatTheme.of(context).theme.errorColor,
-                
+                package: 'pubd_chat'
               );
       case types.Status.seen:
         return InheritedChatTheme.of(context).theme.seenIcon != null
@@ -400,7 +400,7 @@ class Message extends StatelessWidget {
             : Image.asset(
                 'assets/icon-seen.png',
                 color: InheritedChatTheme.of(context).theme.primaryColor,
-                
+                package: 'pubd_chat'
               );
       case types.Status.sending:
         return InheritedChatTheme.of(context).theme.sendingIcon != null

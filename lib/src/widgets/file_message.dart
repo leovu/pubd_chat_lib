@@ -58,7 +58,7 @@ class FileMessage extends StatelessWidget {
                       : Image.asset(
                           'assets/icon-document.png',
                           color: color,
-                          
+                          package: 'pubd_chat'
                         ),
                 ],
               ),
