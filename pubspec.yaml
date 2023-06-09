@@ -66,6 +66,32 @@ flutter:
       web:
         pluginClass: PubdChatWeb
         fileName: pubd_chat_web.dart
+  assets:
+    - assets/meme/panda/
+    - assets/meme/usagyuun/
+    - assets/meme/mimicat/
+    - assets/icon-rabbit.png
+    - assets/icon-emoji.png
+    - assets/icon-panda.png
+    - assets/icon-cat.png
+    - assets/icon-attachment.png
+    - assets/icon-delivered.png
+    - assets/icon-document.png
+    - assets/icon-error.png
+    - assets/icon-seen.png
+    - assets/icon-send.png
+    - assets/2.0x/icon-attachment.png
+    - assets/2.0x/icon-delivered.png
+    - assets/2.0x/icon-document.png
+    - assets/2.0x/icon-error.png
+    - assets/2.0x/icon-seen.png
+    - assets/2.0x/icon-send.png
+    - assets/3.0x/icon-attachment.png
+    - assets/3.0x/icon-delivered.png
+    - assets/3.0x/icon-document.png
+    - assets/3.0x/icon-error.png
+    - assets/3.0x/icon-seen.png
+    - assets/3.0x/icon-send.png
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

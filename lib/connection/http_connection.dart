@@ -4,7 +4,7 @@ import 'package:pubd_chat/connection/chat_connection.dart';
 import 'package:http/http.dart' as http;
 
 class HTTPConnection {
-  static String domain = 'https://pubd.site/api/';
+  static String domain = 'http://14.225.192.203/';
   static String chatDomain = 'http://14.225.192.203';
   Future<ResponseData> upload(String path, File file) async {
     final uri = Uri.parse('$domain$path');
