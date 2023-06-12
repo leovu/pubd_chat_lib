@@ -78,12 +78,10 @@ class ChatConnection {
       "type": type,
       "messageText": messageText
     };
-    ResponseData responseData = await connection.post('api/chat/room/$id/message', json);
+    ResponseData responseData = await connection.post('room/$id/message', json);
     if(responseData.isSuccess) {
-      if(responseData.data['error_code'] == 0) {
-        streamSocket.sendMessage(messageText, id);
-        return responseData.data['data']['_id'];
-      }
+      streamSocket.sendMessage(messageText, id);
+      return responseData.data['post']['_id'];
     }
     return null;
   }
