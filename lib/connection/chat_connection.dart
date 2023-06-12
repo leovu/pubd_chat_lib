@@ -16,6 +16,7 @@ class ChatConnection {
   static String? roomId;
   static User? user;
   static late BuildContext buildContext;
+  static Function(dynamic)? sendActionBonus;
   static bool isLoadMore = false;
   static Future<bool>init(String chatId,Map<String, dynamic>? userData) async {
     HttpOverrides.global = MyHttpOverrides();
@@ -78,6 +79,9 @@ class ChatConnection {
       "type": type,
       "messageText": messageText
     };
+    if(ChatConnection.sendActionBonus != null) {
+      ChatConnection.sendActionBonus!(json);
+    }
     ResponseData responseData = await connection.post('room/$id/message', json);
     if(responseData.isSuccess) {
       streamSocket.sendMessage(messageText, id);

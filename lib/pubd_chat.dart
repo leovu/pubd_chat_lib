@@ -46,7 +46,9 @@ class PubdChat {
       String appIcon,Locale locale,
       Map<String,dynamic>? userData,
       { String? domain,
-        String? chatDomain}) async {
+        String? chatDomain,
+        Function(dynamic)? sendActionBonus
+      }) async {
     PubdChat.context = context;
     showLoading(PubdChat.context!);
     await initializeDateFormatting();
@@ -55,6 +57,9 @@ class PubdChat {
     }
     if(chatDomain != null) {
       HTTPConnection.chatDomain = chatDomain;
+    }
+    if(sendActionBonus != null) {
+      ChatConnection.sendActionBonus = sendActionBonus;
     }
     ChatConnection.locale = locale;
     ChatConnection.buildContext = context;

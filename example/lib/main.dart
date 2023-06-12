@@ -46,7 +46,8 @@ class _MyAppState extends State<MyApp> {
                       'assets/icon-app.png',
                     const Locale('vi', 'VN'), data,
                     domain: 'https://pubd.site/api/',
-                    chatDomain: 'http://14.225.192.203'
+                    chatDomain: 'http://14.225.192.203',
+                    sendActionBonus: sendActionBonus
                   );
                 },
                 child: Container(
@@ -58,5 +59,8 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
     );
+  }
+  sendActionBonus(dynamic value) {
+    print(value);
   }
 }
