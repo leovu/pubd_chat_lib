@@ -24,6 +24,7 @@ class Data {
   String? urlImageView;
   String? id;
   String? token;
+  String? AccessToken;
 
   Data(
       {userName,
@@ -37,7 +38,8 @@ class Data {
         messageId,
         urlImageView,
         id,
-        token});
+        token,
+        AccessToken});
 
   Data.fromJson(Map<String, dynamic> json) {
     userName = json['UserName'];
@@ -52,6 +54,7 @@ class Data {
     urlImageView = json['UrlImageView'];
     id = json['id'];
     token = json['token'];
+    AccessToken = json['AccessToken'];
   }
 
   Map<String, dynamic> toJson() {

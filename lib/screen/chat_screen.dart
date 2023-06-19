@@ -46,6 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ChatConnection.unsubscribe();
     ChatConnection.isLoadMore = false;
     ChatConnection.roomId = null;
+    ChatConnection.closeChatStream();
   }
 
   _refreshMessage(dynamic cData) async {

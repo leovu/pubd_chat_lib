@@ -4,18 +4,18 @@ import 'package:pubd_chat/connection/chat_connection.dart';
 import 'package:http/http.dart' as http;
 
 class HTTPConnection {
-  static String domain = 'http://14.225.192.203/';
-  static String chatDomain = 'http://14.225.192.203';
+  static String domain = 'http://14.225.192.203';
+  static String mainDomain = 'https://pubd.site/';
   Future<ResponseData> upload(String path, File file) async {
-    final uri = Uri.parse('$domain$path');
+    final uri = Uri.parse('$mainDomain$path');
     var request = http.MultipartRequest('POST', uri);
     request.headers['Content-Type'] = 'multipart/form-data';
     if(ChatConnection.user != null) {
-      request.headers['Authorization'] = 'Bearer ${ChatConnection.user!.data!.token!}';
+      request.headers['Authorization'] = 'Bearer ${ChatConnection.user!.data!.AccessToken!}';
     }
     request.files.add(
       http.MultipartFile(
-        'file',
+        'image',
         file.readAsBytes().asStream(),
         file.lengthSync(),
         filename: file.path.split("/").last,

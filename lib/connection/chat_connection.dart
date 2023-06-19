@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pubd_chat/connection/http_connection.dart';
 import 'package:pubd_chat/connection/socket.dart';
@@ -8,8 +10,25 @@ import 'dart:io';
 import 'package:pubd_chat/model/message.dart' as c;
 import 'package:image_picker/image_picker.dart';
 
+class ChatStream<T> {
+  final StreamController<T> stream = StreamController<T>();
+  Sink<T> get _input => stream.sink;
+  Stream<T> get output => stream.stream;
+  T? _currentValue;
+  T? get current => _currentValue;
+  void update(T value) {
+    _currentValue = value;
+    _input.add(value);
+  }
+  void close() {
+    stream.close();
+  }
+}
+
 class ChatConnection {
   static late Locale locale;
+  static ChatStream<bool> chatStreamEmoji = ChatStream();
+  static ChatStream<bool> chatStreamSendImage = ChatStream();
   static StreamSocket streamSocket = StreamSocket();
   static HTTPConnection connection = HTTPConnection();
   static late String appIcon;
@@ -50,13 +69,6 @@ class ChatConnection {
     }
     return null;
   }
-  static Future<Contact?>contactList() async {
-    ResponseData responseData = await connection.get('api/chat/contact');
-    if(responseData.isSuccess) {
-      return Contact.fromJson(responseData.data);
-    }
-    return null;
-  }
   static Future<List<c.Messages>?>loadMoreMessageRoom(String id ,int index) async {
     ResponseData responseData = await connection.get('room/$id?limit=15&page=$index');
     if(responseData.isSuccess) {
@@ -65,11 +77,9 @@ class ChatConnection {
     return null;
   }
   static Future<String?>upload(File file) async {
-    ResponseData responseData = await connection.upload('api/media/chat-upload', file);
+    ResponseData responseData = await connection.upload('update-image', file);
     if(responseData.isSuccess) {
-      if(responseData.data['error_code'] == 0) {
-        return responseData.data['data']['url'];
-      }
+      return responseData.data['Data']['Result']['UrlImageView'];
     }
     return null;
   }
@@ -86,15 +96,6 @@ class ChatConnection {
     if(responseData.isSuccess) {
       streamSocket.sendMessage(messageText, id);
       return responseData.data['post']['_id'];
-    }
-    return null;
-  }
-  static Future<Room?>roomList() async {
-    ResponseData responseData = await connection.get('api/chat/room');
-    if(responseData.isSuccess) {
-      if(responseData.data['error_code'] == 0) {
-        return Room.fromJson(responseData.data);
-      }
     }
     return null;
   }
@@ -121,5 +122,11 @@ class ChatConnection {
       streamSocket.socket!.disconnect();
       streamSocket.dispose();
     }
+  }
+  static closeChatStream() {
+    chatStreamEmoji.close();
+    chatStreamSendImage.close();
+    chatStreamEmoji = ChatStream();
+    chatStreamSendImage = ChatStream();
   }
 }

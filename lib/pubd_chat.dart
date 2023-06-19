@@ -42,11 +42,19 @@ class PubdChat {
     }
     return null;
   }
+  static showEmoji(bool value) {
+    ChatConnection.chatStreamEmoji.update(value);
+  }
+  static showSendImage(bool value) {
+    ChatConnection.chatStreamSendImage.update(value);
+  }
   static Future<bool> open(BuildContext context, String chatId,
       String appIcon,Locale locale,
       Map<String,dynamic>? userData,
       { String? domain,
-        String? chatDomain,
+        String? mainDomain,
+        bool? isShowEmoji,
+        bool? isShowSendImage,
         Function(dynamic)? sendActionBonus
       }) async {
     PubdChat.context = context;
@@ -55,19 +63,25 @@ class PubdChat {
     if(domain != null) {
       HTTPConnection.domain = domain;
     }
-    if(chatDomain != null) {
-      HTTPConnection.chatDomain = chatDomain;
+    if(mainDomain != null) {
+      HTTPConnection.mainDomain = mainDomain;
     }
     if(sendActionBonus != null) {
       ChatConnection.sendActionBonus = sendActionBonus;
+    }
+    if(isShowEmoji == true) {
+      PubdChat.showEmoji(true);
+    }
+    if(isShowSendImage == true) {
+      PubdChat.showSendImage(true);
     }
     ChatConnection.locale = locale;
     ChatConnection.buildContext = context;
     ChatConnection.appIcon = appIcon;
     bool result = await connectSocket(PubdChat.context!,chatId,appIcon,locale,userData,domain:domain);
-    Navigator.of(PubdChat.context!).pop();
     if(result) {
       Rooms? rooms = await ChatConnection.initiate([chatId,ChatConnection.user!.data!.messageId!]);
+      Navigator.of(PubdChat.context!).pop();
       if(rooms != null) {
         await Navigator.of(PubdChat.context!,rootNavigator: true).push(
             MaterialPageRoute(builder: (context) => ChatScreen(data: rooms),settings: const RouteSettings(name: 'home_screen')));
@@ -78,6 +92,7 @@ class PubdChat {
       }
     }
     else {
+      Navigator.of(PubdChat.context!).pop();
       return false;
     }
   }

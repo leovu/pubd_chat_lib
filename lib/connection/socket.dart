@@ -14,7 +14,7 @@ class StreamSocket {
   }
   String? id () {return socket!.id;}
   void connectAndListen(StreamSocket streamSocket, User user) {
-    socket = io.io(HTTPConnection.chatDomain,
+    socket = io.io(HTTPConnection.domain,
         io.OptionBuilder().setTransports(['websocket']).build());
     socket!.onConnectError((data) {
       print(data);
