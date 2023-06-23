@@ -95,7 +95,7 @@ class Messages {
         'firstName': postedByUser!.firstName,
         'lastName': postedByUser!.lastName,
         'id':postedByUser!.sId,
-        'imageUrl':null,
+        'imageUrl':postedByUser!.avatar,
       };
     }
     if(createdAt != null) {
@@ -171,6 +171,7 @@ class PostedByUser {
   String? createdAt;
   String? updatedAt;
   int? iV;
+  String? avatar;
 
   PostedByUser(
       {sId,
@@ -189,6 +190,9 @@ class PostedByUser {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
+    if(json.containsKey('avatar')) {
+      avatar = json['avatar'];
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -199,6 +203,7 @@ class PostedByUser {
     data['type'] = type;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
+    data['avatar'] = avatar;
     data['__v'] = iV;
     return data;
   }

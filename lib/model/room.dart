@@ -226,6 +226,7 @@ class People {
   String? createdAt;
   String? updatedAt;
   int? iV;
+  String? avatar;
 
   People(
       {sId,
@@ -234,7 +235,8 @@ class People {
         type,
         createdAt,
         updatedAt,
-        iV});
+        iV,
+        avatar});
 
   People.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -243,6 +245,9 @@ class People {
     type = json['type'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    if(json.containsKey('avatar')) {
+      avatar = json['avatar'];
+    }
     iV = json['__v'];
   }
 

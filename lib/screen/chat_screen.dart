@@ -107,7 +107,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                       !isGroup ? CircleAvatar(
                         radius: 12.0,
-                        child: AutoSizeText(
+                        backgroundImage: info.avatar != null ? NetworkImage(info.avatar!) : null,
+                        child:
+                        info.avatar != null ? null :
+                        AutoSizeText(
                           info.getAvatarName(),
                           style: const TextStyle(color: Colors.white,fontSize: 9),),
                       ) : const CircleAvatar(
