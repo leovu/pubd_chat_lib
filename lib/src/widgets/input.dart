@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -229,7 +228,8 @@ class _InputState extends State<Input> {
                     if (widget.onAttachmentPressed != null)
                       StreamBuilder<bool?>(
                           initialData: false,
-                          stream: ChatConnection.chatStreamSendImage.stream.stream,
+                          stream:
+                              ChatConnection.chatStreamSendImage.stream.stream,
                           builder: (context, snapshot) {
                             return Visibility(
                               visible: snapshot.data ?? false,
@@ -381,40 +381,47 @@ class _InputState extends State<Input> {
                           Expanded(
                             child: emojiIndex == 0
                                 ? EmojiPicker(
-                                    onEmojiSelected:
-                                        (Category category, Emoji emoji) {
-                                      _onEmojiSelected(emoji);
+                                    onEmojiSelected: (category, emoji) {
+                                      _onEmojiSelected(category, emoji);
                                     },
                                     onBackspacePressed: _onBackspacePressed,
                                     config: Config(
-                                        columns: 7,
-                                        emojiSizeMax:
-                                            32 * (Platform.isIOS ? 1.30 : 1.0),
-                                        verticalSpacing: 0,
-                                        horizontalSpacing: 0,
-                                        initCategory: Category.RECENT,
-                                        bgColor: Colors.black,
-                                        indicatorColor: Colors.blue,
-                                        iconColor: Colors.grey,
-                                        iconColorSelected: Colors.blue,
-                                        progressIndicatorColor: Colors.blue,
-                                        backspaceColor: Colors.blue,
-                                        skinToneDialogBgColor: Colors.white,
-                                        skinToneIndicatorColor: Colors.grey,
-                                        enableSkinTones: true,
-                                        showRecentsTab: true,
-                                        recentsLimit: 28,
-                                        noRecents: const Text(
-                                          'No Recents',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.black26),
-                                          textAlign: TextAlign.center,
+                                        height: 256,
+                                        checkPlatformCompatibility: true,
+                                        emojiViewConfig: EmojiViewConfig(
+                                          emojiSizeMax: 32 *
+                                              (Platform.isIOS ? 1.30 : 1.0),
+                                          backgroundColor: Colors.black,
+                                          recentsLimit: 28,
+                                          noRecents: const Text(
+                                            'No Recents',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black26),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          loadingIndicator:
+                                              const CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.blue),
+                                          ),
                                         ),
-                                        tabIndicatorAnimDuration:
-                                            kTabScrollDuration,
-                                        categoryIcons: const CategoryIcons(),
-                                        buttonMode: ButtonMode.MATERIAL))
+                                        categoryViewConfig: CategoryViewConfig(
+                                          backgroundColor: Colors.black,
+                                          iconColorSelected: Colors.blue,
+                                          iconColor: Colors.grey,
+                                          indicatorColor: Colors.blue,
+                                          backspaceColor: Colors.blue,
+                                          tabIndicatorAnimDuration:
+                                              kTabScrollDuration,
+                                          categoryIcons: const CategoryIcons(),
+                                        ),
+                                        skinToneConfig: const SkinToneConfig(
+                                          enabled: true,
+                                          dialogBackgroundColor: Colors.white,
+                                          indicatorColor: Colors.grey,
+                                        )))
                                 : Column(
                                     children: [
                                       Expanded(
@@ -491,7 +498,7 @@ class _InputState extends State<Input> {
     }
   }
 
-  _onEmojiSelected(Emoji emoji) {
+  void _onEmojiSelected(Category? category, Emoji emoji) {
     _textController
       ..text += emoji.emoji
       ..selection = TextSelection.fromPosition(
