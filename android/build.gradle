@@ -2,14 +2,14 @@ group 'com.example.pubd.chat.pubd_chat'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.10'
+    ext.kotlin_version = '1.9.10'  // Cập nhật từ 1.7.10
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.6.0'
+        classpath 'com.android.tools.build:gradle:8.6.0'  // Cập nhật từ 7.2.0
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -25,8 +25,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "com.example.pubd.chat.pubd_chat"
-    compileSdkVersion 31
+    namespace "com.example.pubd.chat.pubd_chat"  // THÊM DÒNG NÀY
+    compileSdkVersion 34  // Cập nhật từ 31
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +42,6 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21  // Cập nhật từ 16
     }
 }
